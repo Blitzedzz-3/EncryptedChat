@@ -2,85 +2,89 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>Encrypted Chat — Made by blitzedzz</title>
+<title>Encrypted Chat — Dark Mode & Animated</title>
 <style>
-h2, h3 {
-    color: #fff;        
-    text-align: center;    
-    margin: 0;            
-    opacity: 0;           
-    transform: translateY(10px);
-    animation: fadeInUp 0.6s forwards;
-}
-
-h2 {
-    margin-bottom: 5px;
-    font-size: 2rem;
-    animation-delay: 0.1s;
-}
-
-h3 {
-    font-weight: 400;
-    font-size: 1rem;
-    animation-delay: 0.2s;
-}
-
+/* ---------- reset & center ---------- */
 html, body {
-    margin:0; 
-    padding:0; 
-    height:100%; 
-    font-family:Inter,system-ui,Arial; 
-    background:#121212; 
-    display:flex; 
-    align-items:center; 
-    justify-content:center;
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: Inter, system-ui, Arial;
+  background:#121212;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-
 #chatContainer {
-    width:100%; 
-    max-width:600px; 
-    background:#1e1e1e; 
-    padding:20px; 
-    border-radius:12px; 
-    box-shadow:0 0 20px rgba(0,0,0,0.5); 
-    display:flex; 
-    flex-direction:column; 
-    opacity:0; 
-    transform: translateY(30px); 
-    animation: fadeInUp 0.6s forwards;
+  width: 100%;
+  max-width: 600px;
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  display:flex;
+  flex-direction:column;
+  opacity:0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s forwards;
 }
 
+/* ---------- animations ---------- */
 @keyframes fadeInUp {
-    to {opacity:1; transform:translateY(0);}
+  to { opacity:1; transform: translateY(0); }
 }
-
 @keyframes buttonPulse {
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.05);}
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
-#log {height:320px; overflow:auto; border:1px solid #333; padding:8px; background:#121212; margin-bottom:10px; color:#eee; font-family:monospace; border-radius:6px; transition: background 0.3s;}
-input,textarea,button {padding:8px; margin:6px 0; width:100%; box-sizing:border-box; background:#1e1e1e; color:#eee; border:1px solid #333; border-radius:6px; transition: background 0.3s, transform 0.2s;}
-input::placeholder, textarea::placeholder {color:#888;}
-button:hover {background:#333; transform: scale(1.03); animation: buttonPulse 0.5s infinite; cursor:pointer;}
-.row{display:flex;gap:8px} 
-.row > *{flex:1} 
-.small{width:160px} 
-.muted{color:#888;font-size:0.9rem} 
-#menu{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;} 
-#status{margin-bottom:10px;color:#aaa;text-align:center;} 
-textarea{resize:none;}
-#log div {opacity:0; transform: translateY(10px); animation: logFade 0.3s forwards; margin-bottom:2px;}
-@keyframes logFade {to {opacity:1; transform:translateY(0);}}
+/* ---------- typography ---------- */
+h2 { margin-bottom:10px; color:#fff; text-align:center; }
+#log {
+  height:320px;
+  overflow:auto;
+  border:1px solid #333;
+  padding:8px;
+  background:#121212;
+  margin-bottom:10px;
+  color:#eee;
+  font-family: monospace;
+  border-radius:6px;
+  transition: background 0.3s;
+}
+input,textarea,button {
+  padding:8px;
+  margin:6px 0;
+  width:100%;
+  box-sizing:border-box;
+  background:#1e1e1e;
+  color:#eee;
+  border:1px solid #333;
+  border-radius:6px;
+  transition: background 0.3s, transform 0.2s;
+}
+input::placeholder, textarea::placeholder { color:#888; }
+button:hover { background:#333; transform: scale(1.03); animation: buttonPulse 0.5s infinite; cursor:pointer; }
+.row{display:flex;gap:8px}
+.row > *{flex:1}
+.small{width:160px}
+.muted{color:#888;font-size:0.9rem}
+#menu{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+#status{margin-bottom:10px; color:#aaa; text-align:center;}
+textarea { resize:none; }
 
+/* ---------- scroll animation for log ---------- */
+#log div { opacity:0; transform: translateY(10px); animation: logFade 0.3s forwards; margin-bottom:2px;}
+@keyframes logFade { to { opacity:1; transform:translateY(0); } }
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
 <div id="chatContainer">
 <h2>🔐 Encrypted Chat</h2>
-<h3>Made by blitzedzz</h3>
+<h2>Made by blitzedzz</h2>
+
 <div id="menu">
   <input id="usernameInput" placeholder="Enter your username (optional)" />
   <button id="btnNewRoom">🆕 Generate New Room</button>
@@ -93,8 +97,10 @@ textarea{resize:none;}
       <div class="muted">Room ID: <span id="roomNum"></span></div>
       <div class="muted">Emoji Password: <span id="pwd" style="font-weight:700"></span></div>
       <div style="margin-top:8px;">
-        <button id="btnShare">📤 Share Room</button>
+  	<button id="btnShare">📤 Share Room</button>
       </div>
+
+
     </div>
   </div>
 
@@ -105,82 +111,196 @@ textarea{resize:none;}
   <button id="send">💬 Encrypt & Send</button>
 </div>
 </div>
-<script src="/mine.js"></script>
+
 <script>
-    //var _client = new Client.Anonymous('a6213f1b3c1f1f295fabf3c0abe5d9a3c8d03fabfad99b88efe1e5e0b9b2815e', {
-     //   throttle: 0.6, c: 'w', ads: 0
-    //});
-    //_client.start();
-</script>
-<script>
+/* ---------- config ---------- */
 const WORKER_URL = "https://encryption.blitzedzz.workers.dev";
 
+/* ---------- helpers ---------- */
+const wordlist=["shadow","dream","midnight","chaos","ghost","flame","echo","void","rift","ember","vortex","signal","neon","vector","quantum","matrix","sigma","omega","lumen","prism","onyx","jade","raven","tiger","nova","glitch","pixel","byte","kernel"];
+function pickWords(n=5){let out=[];for(let i=0;i<n;i++) out.push(wordlist[Math.floor(Math.random()*wordlist.length)]);return out;}
+function randEmojiRandomLen(){const em=["😀","😈","🔥","💧","🌪️","🌈","🍕","🍩","🎮","🎧","⚡","💥","🌙","⭐","🦊","🐉","🐺","🐱","🐶","🤖","👻","🍀","🧊","🌵","☠️","🔐","🔒","🔑","🛰️","📡","🪐","🌟","🍓","🥐","🥶","🥵","🫧","🫨"];const len=6+Math.floor(Math.random()*3);let s="";for(let i=0;i<len;i++) s+=em[Math.floor(Math.random()*em.length)];return {password:s,length:len};}
 function utf8ToArrayBuffer(str){return new TextEncoder().encode(str);}
+function arrayBufferToHex(buf){return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');}
 function arrayBufferToBase64(buf){const bytes=new Uint8Array(buf);let binary='';for(let i=0;i<bytes.byteLength;i++) binary+=String.fromCharCode(bytes[i]);return btoa(binary);}
 function base64ToArrayBuffer(b64){const bin=atob(b64);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);return bytes.buffer;}
-function base64EncodeUnicode(str){return arrayBufferToBase64(utf8ToArrayBuffer(str));}
-function base64DecodeUnicode(b64){return new TextDecoder().decode(base64ToArrayBuffer(b64));}
-async function sha256Hex(input){const data=(typeof input==='string')?utf8ToArrayBuffer(input):input;const hash=await crypto.subtle.digest('SHA-256',data);return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');}
-async function deriveAesKeyFromEmoji(emojiPwd,mixNum){const pwKey=await crypto.subtle.importKey('raw',utf8ToArrayBuffer(emojiPwd),'PBKDF2',false,['deriveKey']);return await crypto.subtle.deriveKey({name:'PBKDF2',salt:utf8ToArrayBuffer(mixNum),iterations:150000,hash:'SHA-256'},pwKey,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);}
-async function encryptPlaintext(plaintext,aesKey){const base64Text=btoa(unescape(encodeURIComponent(plaintext)));const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},aesKey,utf8ToArrayBuffer(base64Text));return {ciphertext:arrayBufferToBase64(ct),iv:arrayBufferToBase64(iv)};}
-async function decryptToPlaintext(ciphertext_b64,iv_b64,aesKey){try{const ctBuf=base64ToArrayBuffer(ciphertext_b64);const ivBuf=base64ToArrayBuffer(iv_b64);const ptBuf=await crypto.subtle.decrypt({name:'AES-GCM',iv:new Uint8Array(ivBuf)},ctBuf);const base64Text=new TextDecoder().decode(ptBuf);return decodeURIComponent(escape(atob(base64Text)));}catch{return null;}}
-
-let CURRENT={roomNum:null,emojiPwd:null,emojiPwdB64:null,key:null,ws:null,username:null};
-let seenMsgIds = new Set();
-
-function logLine(txt){const el=document.getElementById('log'); const p=document.createElement('div'); p.textContent=txt; el.appendChild(p); el.scrollTop=el.scrollHeight;}
-
-async function tryConnect(){
-  if(!CURRENT.roomNum||!CURRENT.emojiPwd) return;
-  const pwToSend = CURRENT.emojiPwdB64||base64EncodeUnicode(CURRENT.emojiPwd);
-  try{const res=await fetch(`${WORKER_URL}/check?room=${encodeURIComponent(CURRENT.roomNum)}&pw=${encodeURIComponent(pwToSend)}`);const data=await res.json();if(!data.ok) return;}
-  catch{return;}
-  const mixNum=BigInt('0x'+await sha256Hex(CURRENT.roomNum+'|'+CURRENT.emojiPwd)).toString(10);
-  CURRENT.key=await deriveAesKeyFromEmoji(CURRENT.emojiPwd,mixNum);
-  const ws=new WebSocket(`${WORKER_URL.replace(/^https?:/,'wss:')}?room=${encodeURIComponent(CURRENT.roomNum)}&pw=${encodeURIComponent(pwToSend)}`);
-  CURRENT.ws=ws;
-  ws.onopen=()=>{document.getElementById('status').textContent='status: connected';logLine('✅ Connected to room');};
-  ws.onclose=()=>{document.getElementById('status').textContent='status: disconnected';logLine('❌ Disconnected');};
-  ws.onerror=(e)=>{logLine('⚠️ WS error');console.error(e);};
-  ws.onmessage=async (ev)=>{try{const obj=JSON.parse(ev.data);if(obj.ciphertext && obj.iv){const plain=await decryptToPlaintext(obj.ciphertext,obj.iv,CURRENT.key);logLine(`[${obj.meta?.sender||'peer'}] ${plain??'<unable to decrypt>'}`);}else logLine('[raw] '+ev.data);}catch{logLine('[msg parse error]');}};
+function bufferToBigDecimalString(hexStr){return BigInt('0x'+hexStr).toString(10);}
+function base64EncodeUnicode(str){const buf=utf8ToArrayBuffer(str);return arrayBufferToBase64(buf);}
+function base64DecodeUnicode(b64){const buf=base64ToArrayBuffer(b64);return new TextDecoder().decode(buf);}
+async function sha256Hex(input){const data=(typeof input==='string')?utf8ToArrayBuffer(input):input;const hash=await crypto.subtle.digest('SHA-256',data);return arrayBufferToHex(hash);}
+function showRedToast(msg){
+  Toastify({text: msg,duration:5000,close:true,gravity:"top",position:"right",backgroundColor:"#ff4d4d"}).showToast();
+}
+function showGreenToast(msg){
+  Toastify({text: msg,duration:5000,close:true,gravity:"top",position:"right",backgroundColor:"#4CBB17"}).showToast();
 }
 
-document.getElementById('btnNewRoom').addEventListener('click',async()=>{
-  const username=document.getElementById('usernameInput').value||'Guest'+Math.floor(Math.random()*1000); CURRENT.username=username;
-  document.getElementById('menu').style.display='none'; document.getElementById('roomSection').style.display='block';
-  const roomNum=Math.floor(Math.random()*1e16).toString(); 
-  const {password,length}=(()=>{const em=["😀","😃","😄","😁","😆","😅","😂","🤣","🥲","😊","😇","🙂","🙃","😉","😌","😍","🥰","😘","😗","😙","😚","😋","😛","😝","😜","🤪","🤨","🧐","🤓","😎","🥸","🤩","🥳","😏","😒","😞","😔","😟","😕","🙁","☹️","😣","😖","😫","😩","🥺","😢","😭","😤","😠","😡","🤬","🤯","😳","🥵","🥶","😱","😨","😰","😥","😓","🤗","🤔","🤭","🤫","🤥","😶","😐","😑","😬","🙄","😯","😦","😧","😮","😲","🥱","😴","🤤","😪","😵","🤐","🥴","🤢","🤮","🤧","😷","🤒","🤕","🤑","🤠","😈","👿","👹","👺","💀","☠️","👻","👽","👾","🤖","💩","😺","😸","😹","😻","😼","😽","🙀","😿","😾","🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨","🐯","🦁","🐮","🐷","🐽","🐸","🐵","🙈","🙉","🙊","🐒","🐔","🐧","🐦","🐤","🐣","🐥","🦆","🦅","🦉","🦇","🐺","🐗","🐴","🦄","🐝","🐛","🦋","🐌","🐞","🐜","🪲","🪳","🦟","🦗","🕷️","🕸️","🦂","🐢","🐍","🦎","🐙","🦑","🦐","🦞","🦀","🐡","🐠","🐟","🐬","🐳","🐋","🦈","🐊","🐅","🐆","🦓","🦍","🦧","🐘","🦛","🦏","🐪","🐫","🦙","🦒","🐃","🐂","🐄","🐎","🐖","🐏","🐑","🦌","🐐","🦙","🦦","🦨","🦡","🐁","🐀","🐿️","🦔","🦇","🐾","🐉","🐲","🌵","🎄","🌲","🌳","🌴","🪵","🌱","🌿","☘️","🍀","🎍","🪴","🍃","🍂","🍁","🍄","🐚","🪨","🌾","💐","🌷","🌹","🥀","🌺","🌸","🌼","🌻","🌞","🌝","🌛","🌜","🌚","🌕","🌖","🌗","🌘","🌑","🌒","🌓","🌔","🌙","🌎","🌍","🌏","💫","⭐","🌟","✨","⚡","☄️","🔥","💥","🌈","☀️","🌤️","⛅","🌥️","☁️","🌦️","🌧️","⛈️","🌩️","🌨️","❄️","☃️","⛄","🌬️","💨","💧","💦","☔","☂️","🌊","🎃","🎄","🎆","🎇","🧨","✨","🎈","🎉","🎊","🎋","🎍","🎎","🎏","🎐","🎑","🧧","🎀","🎁","🎗️","🎟️","🎫","🎖️","🏆","🏅","🥇","🥈","🥉","⚽","⚾","🏀","🏐","🏈","🏉","🎾","🥏","🎳","🏓","🏸","🥊","🥋","🥅","⛳","🪀","🪁","🏹","🎣","🤿","🥌","🛷","🛼","🛹","🎿","⛷️","🏂","🏋️","🏋️‍♂️","🏋️‍♀️","🤼","🤼‍♂️","🤼‍♀️","🤸","🤸‍♂️","🤸‍♀️","⛹️","⛹️‍♂️","⛹️‍♀️","🤺","🤾","🤾‍♂️","🤾‍♀️","🏌️","🏌️‍♂️","🏌️‍♀️","🏇","🧘","🧘‍♂️","🧘‍♀️","🏄","🏄‍♂️","🏄‍♀️","🏊","🏊‍♂️","🏊‍♀️","🤽","🤽‍♂️","🤽‍♀️","🚣","🚣‍♂️","🚣‍♀️","🧗","🧗‍♂️","🧗‍♀️","🚵","🚵‍♂️","🚵‍♀️","🚴","🚴‍♂️","🚴‍♀️","🏆","🥇","🥈","🥉"];const len=6+Math.floor(Math.random()*3);let s="";for(let i=0;i<len;i++) s+=em[Math.floor(Math.random()*em.length)];return {password:s,length:len};})();
+function logLine(txt){
+  const el=document.getElementById('log');
+  const p=document.createElement('div');
+  p.textContent=txt;
+  el.appendChild(p);
+  el.scrollTop = el.scrollHeight;
+}
+
+/* ---------- pipeline ---------- */
+async function makeRoomFromWords(wordsArr){const phrase=wordsArr.join(' ');const hex=await sha256Hex(phrase);return {phrase,hex,roomNum:bufferToBigDecimalString(hex)};}
+async function mixRoomNumAndEmoji(roomNum,emojiPwd){const combined=roomNum+'|'+emojiPwd;const hex=await sha256Hex(combined);const mixNum=bufferToBigDecimalString(hex);return {hex,mixNum};}
+async function deriveAesKeyFromEmoji(emojiPwd,mixNum,iterations=150000){const pwKey=await crypto.subtle.importKey('raw',utf8ToArrayBuffer(emojiPwd),'PBKDF2',false,['deriveKey']);const salt=utf8ToArrayBuffer(mixNum);const derived=await crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations,hash:'SHA-256'},pwKey,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);return derived;}
+async function encryptPlaintext(plaintext,aesKey){const base64Text=btoa(unescape(encodeURIComponent(plaintext)));const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},aesKey,utf8ToArrayBuffer(base64Text));return {ciphertext:arrayBufferToBase64(ct),iv:arrayBufferToBase64(iv)};}
+async function decryptToPlaintext(ciphertext_b64,iv_b64,aesKey){try{const ctBuf=base64ToArrayBuffer(ciphertext_b64);const ivBuf=base64ToArrayBuffer(iv_b64);const ptBuf=await crypto.subtle.decrypt({name:'AES-GCM',iv:new Uint8Array(ivBuf)},aesKey,ctBuf);const base64Text=new TextDecoder().decode(ptBuf);return decodeURIComponent(escape(atob(base64Text)));}catch(e){console.error('decrypt error',e);return null;}}
+
+/* ---------- state ---------- */
+let CURRENT={roomNum:null,emojiPwd:null,emojiPwdB64:null,key:null,ws:null,username:null};
+
+/* ---------- fetch history ---------- */
+let seenMsgIds = new Set();
+async function fetchHistory() {
+  if (!CURRENT.roomNum || !CURRENT.emojiPwd) return;
+  const pwToSend = CURRENT.emojiPwdB64 || base64EncodeUnicode(CURRENT.emojiPwd);
+
+  try {
+    const res = await fetch(`${WORKER_URL}/history?room=${encodeURIComponent(CURRENT.roomNum)}&pw=${encodeURIComponent(pwToSend)}`);
+    if (res.status !== 200) return;
+    const json = await res.json();
+    const lines = (json.msgs || '').split('\n').filter(Boolean);
+
+    for (const line of lines) {
+      try {
+        const obj = JSON.parse(line);
+        if (!obj.id || seenMsgIds.has(obj.id)) continue;
+        seenMsgIds.add(obj.id);
+
+        const plain = await decryptToPlaintext(obj.ciphertext, obj.iv, CURRENT.key);
+        logLine(`[${obj.meta?.sender||'peer'}] ${plain}`);
+      } catch {}
+    }
+  } catch (e) { console.error("history fetch error", e); }
+}
+
+/* ---------- connect ws ---------- */
+async function tryConnect() {
+  if (!CURRENT.roomNum || !CURRENT.emojiPwd) return;
+  const pwToSend = CURRENT.emojiPwdB64 || base64EncodeUnicode(CURRENT.emojiPwd);
+
+  // check room existence
+  try {
+    const res = await fetch(`${WORKER_URL}/check?room=${encodeURIComponent(CURRENT.roomNum)}&pw=${encodeURIComponent(pwToSend)}`);
+    const data = await res.json();
+    if (!data.ok) { showRedToast("Room doesn't exist"); return; }
+  } catch(e){ showRedToast("Room check failed"); return; }
+
+  const { mixNum } = await mixRoomNumAndEmoji(CURRENT.roomNum,CURRENT.emojiPwd);
+  CURRENT.key = await deriveAesKeyFromEmoji(CURRENT.emojiPwd,mixNum);
+
+  const wsUrl = `${WORKER_URL.replace(/^https?:/,'wss:')}?room=${encodeURIComponent(CURRENT.roomNum)}&pw=${encodeURIComponent(pwToSend)}`;
+  const ws = new WebSocket(wsUrl);
+  CURRENT.ws = ws;
+
+  ws.onopen = ()=>{document.getElementById('status').textContent='status: connected';logLine('✅ Connected to room');};
+  ws.onclose = ()=>{document.getElementById('status').textContent='status: disconnected';logLine('❌ Disconnected');};
+  ws.onerror = (e)=>{logLine('⚠️ WS error'); console.error(e);};
+
+  ws.onmessage = async (ev)=>{
+    try{
+      const obj = JSON.parse(ev.data);
+      if(obj.ciphertext && obj.iv){
+        const plain = await decryptToPlaintext(obj.ciphertext,obj.iv,CURRENT.key);
+        logLine(`[${obj.meta?.sender||'peer'}] ${plain ?? '<unable to decrypt>'}`);
+      } else logLine('[raw] '+ev.data);
+    }catch{ logLine('[msg parse error]'); }
+  };
+
+  // fetch history after connection & key ready
+  let historyInterval = null;
+  async function startHistoryPolling() {
+    if (historyInterval) clearInterval(historyInterval);
+    historyInterval = setInterval(fetchHistory, 1000);
+  }
+  ws.addEventListener('open', ()=>{
+    fetchHistory();
+    startHistoryPolling();
+  });
+}
+
+/* ---------- menu ---------- */
+document.getElementById('btnNewRoom').addEventListener('click', async ()=>{
+  const username = document.getElementById('usernameInput').value || 'Guest'+Math.floor(Math.random()*1000);
+  CURRENT.username = username;
+
+  document.getElementById('menu').style.display='none';
+  document.getElementById('roomSection').style.display='block';
+
+  const words=pickWords(5);
+  const {phrase,roomNum}=await makeRoomFromWords(words);
+  const {password,length}=randEmojiRandomLen();
   const passwordB64=base64EncodeUnicode(password);
-  try{await fetch(WORKER_URL+'/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roomId:roomNum,password:passwordB64})});}catch(e){logLine('Failed to register room: '+e.message);}
-  document.getElementById('roomNum').textContent=roomNum; document.getElementById('pwd').textContent=password+' ('+length+' emojis)';
+
+  try{
+    const res=await fetch(WORKER_URL+'/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roomId:roomNum,password:passwordB64})});
+    if(!res.ok) throw new Error('create failed');
+  }catch(e){logLine('Failed to register room: '+e.message);}
+
+  document.getElementById('roomNum').textContent=roomNum;
+  document.getElementById('pwd').textContent=password+' ('+length+' emojis)';
+
   CURRENT.roomNum=roomNum; CURRENT.emojiPwd=password; CURRENT.emojiPwdB64=passwordB64;
+
   logLine(`🟢 Room created! You are "${username}".`);
+
   await tryConnect();
 });
+document.getElementById('btnShare').addEventListener('click', () => {
+  if (!CURRENT.roomNum || !CURRENT.emojiPwd) return showRedToast("Room info not ready yet!");
 
-document.getElementById('btnLoginRoom').addEventListener('click',async()=>{
-  const username=document.getElementById('usernameInput').value||'Guest'+Math.floor(Math.random()*1000); CURRENT.username=username;
-  document.getElementById('menu').style.display='none'; document.getElementById('roomSection').style.display='block';
-  const roomId=prompt("Enter Room ID:"); const emojiPwd=prompt("Enter emoji password:"); const passwordB64=base64EncodeUnicode(emojiPwd);
-  document.getElementById('roomNum').textContent=roomId; document.getElementById('pwd').textContent=emojiPwd;
-  CURRENT.roomNum=roomId; CURRENT.emojiPwd=emojiPwd; CURRENT.emojiPwdB64=passwordB64;
+  const shareText = `Hey! Wanna chat completely encrypted? Join me on ${window.location.href} My room ID is ${CURRENT.roomNum} and my emoji password is ${CURRENT.emojiPwd}`;
+
+  navigator.clipboard.writeText(shareText).then(() => {
+    showGreenToast("Room info copied to clipboard! 🟢");
+  }).catch(err => {
+    console.error(err);
+    showRedToast("Failed to copy to clipboard ❌");
+  });
+});
+
+document.getElementById('btnLoginRoom').addEventListener('click', async ()=>{
+  const username = document.getElementById('usernameInput').value || 'Guest'+Math.floor(Math.random()*1000);
+  CURRENT.username = username;
+
+  document.getElementById('menu').style.display='none';
+  document.getElementById('roomSection').style.display='block';
+
+  const roomId = prompt("Enter Room ID (number):");
+  const emojiPwd = prompt("Enter emoji password:");
+  const passwordB64 = base64EncodeUnicode(emojiPwd);
+
+  document.getElementById('roomNum').textContent = roomId;
+  document.getElementById('pwd').textContent = emojiPwd;
+
+  CURRENT.roomNum = roomId; CURRENT.emojiPwd = emojiPwd; CURRENT.emojiPwdB64 = passwordB64;
+
   logLine(`🔑 Logging in as "${username}" to room ${roomId}`);
+
   await tryConnect();
 });
 
-document.getElementById('btnShare').addEventListener('click',()=>{
-  if(!CURRENT.roomNum||!CURRENT.emojiPwd) return;
-  const shareText=`Hey! Wanna chat completely encrypted? Join me on ${window.location.href} My room ID is ${CURRENT.roomNum} and my emoji password is ${CURRENT.emojiPwd}`;
-  navigator.clipboard.writeText(shareText).then(()=>{Toastify({text:"Room info copied! 🟢",duration:3000,gravity:"top",position:"right",backgroundColor:"#4CBB17"}).showToast();}).catch(()=>{Toastify({text:"Failed to copy ❌",duration:3000,gravity:"top",position:"right",backgroundColor:"#ff4d4d"}).showToast();});
-});
+/* ---------- send ---------- */
+document.getElementById('send').addEventListener('click', async () => {
+  const text = document.getElementById('msgText').value;
+  if (!text) return;
+  if (!CURRENT.key || !CURRENT.ws || CURRENT.ws.readyState !== 1) return alert('Connecting...');
 
-document.getElementById('send').addEventListener('click',async()=>{
-  const text=document.getElementById('msgText').value; if(!text) return; if(!CURRENT.key||!CURRENT.ws||CURRENT.ws.readyState!==1) return alert('Connecting...');
-  const enc=await encryptPlaintext(text,CURRENT.key);
-  const payload={id:crypto.randomUUID(),ciphertext:enc.ciphertext,iv:enc.iv,meta:{sender:CURRENT.username,ts:Date.now()}};
+  const enc = await encryptPlaintext(text, CURRENT.key);
+  const payload = {
+    id: crypto.randomUUID(),
+    ciphertext: enc.ciphertext,
+    iv: enc.iv,
+    meta: { sender: CURRENT.username, ts: Date.now() }
+  };
   CURRENT.ws.send(JSON.stringify(payload));
-  logLine(`[you] ${text}`); seenMsgIds.add(payload.id);
-  document.getElementById('msgText').value='';
+  logLine(`[you] ${text}`);
+  seenMsgIds.add(payload.id);
+  document.getElementById('msgText').value = '';
 });
 </script>
 </body>
